@@ -62,7 +62,7 @@ module.exports = function(app, passport) {
     // FACEBOOK ROUTES =====================
     // =====================================
     // route for facebook authentication and login
-    app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    app.get('/auth/facebook', passport.authenticate('facebook', { scope :'email' }));
 
     // handle the callback after facebook has authenticated the user
     app.get('/auth/facebook/callback',
@@ -70,6 +70,43 @@ module.exports = function(app, passport) {
             successRedirect : '/profile',
             failureRedirect : '/'
         }));
+
+    // =====================================
+    // TWITTER ROUTES ======================
+    // =====================================
+    // route for twitter authentication and login
+    app.get('/auth/twitter', passport.authenticate('twitter'));
+
+    // handle the callback after twitter has authenticated the user
+    app.get('/auth/twitter/callback',
+        passport.authenticate('twitter', {
+            successRedirect : '/profile',
+            failureRedirect : '/'
+        }));
+
+
+    //google
+
+    // app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+    // // the callback after google has authenticated the user
+    // app.get('/auth/google/callback',
+    //         passport.authenticate('google', {
+    //                 successRedirect : '/profile',
+    //                 failureRedirect : '/'
+    //         }));
+
+    // app.get('/auth/linkedin',
+    //     passport.authenticate('linkedin', { scope: ['r_basicprofile', 'r_emailaddress'] }));
+
+    // app.get('/auth/linkedin/callback',
+    //   passport.authenticate('linkedin', { failureRedirect: '/login' }),
+    //   function(req, res) {
+    //     // Successful authentication, redirect home.
+    //     res.redirect('/');
+    //   });
+
+
 
     // =====================================
     // LOGOUT ==============================
