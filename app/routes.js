@@ -85,26 +85,17 @@ module.exports = function(app, passport) {
         }));
 
 
-    //google
+    app.get('/auth/linkedin',
+        passport.authenticate('linkedin'));
 
-    // app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
-
-    // // the callback after google has authenticated the user
-    // app.get('/auth/google/callback',
-    //         passport.authenticate('google', {
-    //                 successRedirect : '/profile',
-    //                 failureRedirect : '/'
-    //         }));
-
-    // app.get('/auth/linkedin',
-    //     passport.authenticate('linkedin', { scope: ['r_basicprofile', 'r_emailaddress'] }));
-
-    // app.get('/auth/linkedin/callback',
-    //   passport.authenticate('linkedin', { failureRedirect: '/login' }),
-    //   function(req, res) {
-    //     // Successful authentication, redirect home.
-    //     res.redirect('/');
-    //   });
+        app.get('/auth/linkedin/callback',
+        passport.authenticate('linkedin', {
+            failureRedirect: '/'
+        }),
+        function (req, res) {
+            // Successful authentication, redirect home.
+            res.redirect('/');
+    });
 
 
 
